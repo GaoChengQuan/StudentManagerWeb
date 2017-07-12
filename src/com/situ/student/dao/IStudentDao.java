@@ -117,5 +117,12 @@ public interface IStudentDao {
 	 */
 	public abstract Student findByNameAndPassword(String name, String password);
 
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
+	public abstract boolean deleteAll(String[] ids);
+
 	
 }

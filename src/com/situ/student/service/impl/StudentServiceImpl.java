@@ -122,4 +122,13 @@ public class StudentServiceImpl implements IStudentService{
 		return studentDao.findByNameAndPassword(name, password);
 	}
 
+	@Override
+	public boolean deleteAll(String[] ids) {
+		/*for (String id : ids) {
+			studentDao.delete(Integer.parseInt(id));
+		}*/
+		
+		return studentDao.deleteAll(ids);
+	}
+
 }

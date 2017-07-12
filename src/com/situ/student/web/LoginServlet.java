@@ -14,7 +14,7 @@ import com.situ.student.entity.Student;
 import com.situ.student.service.IStudentService;
 import com.situ.student.service.impl.StudentServiceImpl;
 
-public class LoginFilterServlet extends BaseServlet {
+public class LoginServlet extends BaseServlet {
 	IStudentService studentService = new StudentServiceImpl();
 	
 	private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {

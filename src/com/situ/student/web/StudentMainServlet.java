@@ -149,5 +149,14 @@ public class StudentMainServlet extends BaseServlet {
 		req.getRequestDispatcher("/online_student_list.jsp").forward(req, resp);
 	}
 	
-	
+	private void deleteAll(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		String[] ids = req.getParameterValues("selectIds");
+		for (String id : ids) {
+			System.out.println(id);
+		}
+		studentService.deleteAll(ids);
+		
+		// 重定向
+		resp.sendRedirect(req.getContextPath() + "/student?method=pageList");
+	}
 }

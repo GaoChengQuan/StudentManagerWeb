@@ -29,6 +29,19 @@
 	$(function(){
 		$("#gender option[value='${searchCondition.gender}']").prop("selected", true);
 	});
+	
+	function selectAlls() {
+		$("input[name=selectIds]").prop("checked", $("#selectAll").is(":checked"));
+	}
+	
+	function deleteAll(){
+		var isDel = confirm("您确认要删除吗？");
+		if (isDel) {
+			//要删除
+			$("#mainForm").attr("action", "${pageContext.request.contextPath}/student?method=deleteAll");
+			$("#mainForm").submit();
+		}
+	}
 </script>
 </head>
 <body>
@@ -47,6 +60,8 @@
 				<button type="submit" class="btn btn-primary">搜索</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a class="btn btn-primary"
+					href="javascript:deleteAll()">批量删除</a>
+				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/add_student.jsp">添加学生</a>
 				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/student?method=pageList">查询所有</a>
@@ -54,33 +69,40 @@
 					href="${pageContext.request.contextPath}/student?method=onlineList">在线列表</a>
 			</form>
 		</div>
-		<table class="table table-bordered table-hover table-striped">
-			<tr>
-				<td>ID</td>
-				<td>姓名</td>
-				<td>密码</td>
-				<td>年龄</td>
-				<td>性别</td>
-				<td>删除</td>
-				<td>修改</td>
-			</tr>
-			<c:forEach items="${pageBean.list}" var="student">
+		<form id="mainForm" action="" method="post">
+			<table class="table table-bordered table-hover table-striped">
 				<tr>
-					<td>${student.getId()}</td>
-					<td>${student.getName()}</td>
-					<td>${student.getPassword()}</td>
-					<td>${student.getAge()}</td>
-					<td>${student.getGender()}</td>
-					<td><a href="javascript:void(0);"
-						onclick="delStudent('${student.getId()}')">删除</a>
+					<td>
+						<input type="checkbox" id="selectAll" onClick="selectAlls();"/>
 					</td>
-					<td><a
-						href="${pageContext.request.contextPath}/student?method=toUpdate&id=${student.getId()}">修改</a>
-					</td>
+					<td>ID</td>
+					<td>姓名</td>
+					<td>密码</td>
+					<td>年龄</td>
+					<td>性别</td>
+					<td>删除</td>
+					<td>修改</td>
 				</tr>
-			</c:forEach>
-		</table>
-		
+				<c:forEach items="${pageBean.list}" var="student">
+					<tr>
+						<td>
+							<input type="checkbox" name="selectIds" value="${student.getId()}"/>
+						</td>
+						<td>${student.getId()}</td>
+						<td>${student.getName()}</td>
+						<td>${student.getPassword()}</td>
+						<td>${student.getAge()}</td>
+						<td>${student.getGender()}</td>
+						<td><a href="javascript:void(0);"
+							onclick="delStudent('${student.getId()}')">删除</a>
+						</td>
+						<td><a
+							href="${pageContext.request.contextPath}/student?method=toUpdate&id=${student.getId()}">修改</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</form>
 		<!-- 分页开始 -->
 		<nav aria-label="Page navigation" align="center">
 		  <ul class="pagination">

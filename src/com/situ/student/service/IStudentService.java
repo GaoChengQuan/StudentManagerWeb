@@ -102,4 +102,10 @@ public interface IStudentService {
 	 * @return student!=null 返回指定用户名和密码学生, null：没有这个用户名和密码学生，登陆失败
 	 */
 	public abstract Student findByNameAndPassword(String name, String password);
+
+	/**
+	 * 批量删除
+	 * @param ids
+	 */
+	public abstract boolean deleteAll(String[] ids);
 }

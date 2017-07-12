@@ -482,4 +482,30 @@ public class StudentDaoMysqlImpl implements IStudentDao{
 		return student;
 	
 	}
+
+	@Override
+	public boolean deleteAll(String[] ids) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = JdbcUtil.getConnection();
+			String sql = "delete from student where id=?;";
+			preparedStatement = connection.prepareStatement(sql);
+			for (String id : ids) {
+				preparedStatement.setInt(1, Integer.parseInt(id));
+				preparedStatement.addBatch();
+			}
+			int[] results = preparedStatement.executeBatch();
+			if (results.length == ids.length) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(connection, preparedStatement);
+		}
+		return false;
+	}
 }
