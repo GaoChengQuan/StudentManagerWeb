@@ -30,7 +30,9 @@ public class LoginFilter implements Filter{
 		// /Java1705Web/login.jsp   /Java1705Web/loginFilter
 		System.out.println(uri);
 		String requestPath = uri.substring(uri.lastIndexOf("/") + 1, uri.length());
-		if (requestPath.equals("login.jsp") || requestPath.equals("loginFilter")) {
+		if (requestPath.equals("login.jsp") 
+				|| requestPath.equals("loginFilter")
+				|| requestPath.equals("checkImg")) {
 			//直接放行
 			chain.doFilter(request, response);
 		} else {

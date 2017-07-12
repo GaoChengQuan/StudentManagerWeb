@@ -18,6 +18,20 @@ public class LoginServlet extends BaseServlet {
 	IStudentService studentService = new StudentServiceImpl();
 	
 	private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
+		
+		//验证验证码是不对对
+		String checkCode = req.getParameter("checkCode");
+		String checkCodeSession = (String) req.getSession().getAttribute("checkCodeSession");
+		if (checkCode == null || checkCode.equals("")) {
+			resp.sendRedirect(req.getContextPath() + "/login.jsp");
+			return;
+		}
+		//输入的和生成的不一致
+		if (!checkCode.equalsIgnoreCase(checkCodeSession)) {
+			resp.sendRedirect(req.getContextPath() + "/login.jsp");
+			return;
+		}
+		
 		String name = req.getParameter("name");
 		String password = req.getParameter("password");
 		Student student =  studentService.findByNameAndPassword(name, password);
