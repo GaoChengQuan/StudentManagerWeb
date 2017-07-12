@@ -80,6 +80,7 @@
 					<td>密码</td>
 					<td>年龄</td>
 					<td>性别</td>
+					<td>出生日期</td>
 					<td>删除</td>
 					<td>修改</td>
 				</tr>
@@ -93,6 +94,7 @@
 						<td>${student.getPassword()}</td>
 						<td>${student.getAge()}</td>
 						<td>${student.getGender()}</td>
+						<td>${student.getBirthday()}</td>
 						<td><a href="javascript:void(0);"
 							onclick="delStudent('${student.getId()}')">删除</a>
 						</td>

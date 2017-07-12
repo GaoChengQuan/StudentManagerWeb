@@ -72,13 +72,14 @@ public class StudentDaoMysqlImpl implements IStudentDao{
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = JdbcUtil.getConnection();
-			String sql = "update student set name=?,password=?,age=?,gender=? where id=?;";
+			String sql = "update student set name=?,password=?,age=?,gender=?,birthday=? where id=?;";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, student.getName());
 			preparedStatement.setString(2, student.getPassword());
 			preparedStatement.setInt(3, student.getAge());
 			preparedStatement.setString(4, student.getGender());
-			preparedStatement.setInt(5, student.getId());
+			preparedStatement.setDate(5, new java.sql.Date(student.getBirthday().getTime()));
+			preparedStatement.setInt(6, student.getId());
 			int result = preparedStatement.executeUpdate();
 			if (result > 0) {
 				return true;

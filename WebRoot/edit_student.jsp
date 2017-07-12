@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.css" />
     <script src="${pageContext.request.contextPath}/lib/jquery/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
 	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/lib/datepicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 	<div class="container" style="width:40%">
@@ -34,6 +35,11 @@
 					class="form-control" id="gender" name="gender"
 					value="${student.getGender()}">
 			</div>
+			<div class="form-group">
+		    	<label for="birthday">出生日期</label>
+		    	<input type="text" class="form-control" id="birthday" name="birthday" value="${student.getBirthday()}" readonly="readonly"
+		    	onfocus="WdatePicker({'skin':'whyGreen','dateFmt':'yyyy-MM-dd'})">
+		  	</div>
 			<button type="submit" class="btn btn-primary">确认修改</button>
 		</form>
 	</div>

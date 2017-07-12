@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.css" />
     <script src="${pageContext.request.contextPath}/lib/jquery/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
 	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/lib/datepicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(function() {
 			$("#name").blur(function(){
@@ -52,6 +53,11 @@
 		   <div class="form-group">
 		    <label for="gender">性别</label>
 		    <input type="text" class="form-control" id="gender" name="gender" placeholder="Gender">
+		  </div>
+		  <div class="form-group">
+		    <label for="birthday">出生日期</label>
+		    <input type="text" class="form-control" id="birthday" name="birthday" placeholder="Birthday" readonly="readonly"
+		    	onfocus="WdatePicker({'skin':'whyGreen','dateFmt':'yyyy-MM-dd'})">
 		  </div>
 		  <button type="submit" class="btn btn-primary">添加学生</button>
 		</form>

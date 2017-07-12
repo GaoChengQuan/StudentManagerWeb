@@ -4,6 +4,8 @@ package com.situ.student.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -74,12 +76,21 @@ public class StudentMainServlet extends BaseServlet {
 		String password = req.getParameter("password");
 		String age = req.getParameter("age");
 		String gender = req.getParameter("gender");
+		String birthday = req.getParameter("birthday");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = simpleDateFormat.parse(birthday);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		
 		Student student = studentService.findById(Integer.parseInt(id));
 		student.setName(name);
 		student.setPassword(password);
 		student.setAge(Integer.parseInt(age));
 		student.setGender(gender);
+		student.setBirthday(date);
 		studentService.update(student);
 		
 		resp.sendRedirect(req.getContextPath() + "/student?method=pageList");
@@ -116,11 +127,18 @@ public class StudentMainServlet extends BaseServlet {
 		String password = req.getParameter("password");
 		String age = req.getParameter("age");
 		String gender = req.getParameter("gender");
+		String birthday = req.getParameter("birthday");
 		System.out.println("name:" + name);
 		System.out.println("age:" + age);
 		System.out.println("gender:" + gender);
 		// 2.处理业务
-		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = simpleDateFormat.parse(birthday);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		Student student = new Student(name, password, Integer.parseInt(age), gender, date);
 		IStudentService studentService = new StudentServiceImpl();
 		boolean result = false;
